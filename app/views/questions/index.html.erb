@@ -1,5 +1,9 @@
 <h1> Sassy! </h1>
 
+<% if current_user %>
+  <p> You are logged in as <%= current_user.email %> </p>
+<% end %>
+
 <ul>
   <% @questions.each do |question| %>
     <li>
@@ -17,4 +21,6 @@
 
 <%= link_to "Ask a Question", new_question_path %>
 
-<%= link_to "New User", log_in_path %>
+<%= link_to "New User", new_user_path %>
+
+<%= link_to "Log in", log_in_path %>

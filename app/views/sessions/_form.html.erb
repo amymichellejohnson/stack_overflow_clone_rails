@@ -1,12 +1,10 @@
-<%= render 'layouts/errors', :object => User.new %>
-
-<h1>Sign Up</h1>
-<%=form_for User.new do |f| %>
-  <%=f.label :email %>
-  <%=f.text_field :email %>
-  <%=f.label :password %>
-  <%=f.password_field :password %>
-  <%=f.label :password_confirmation %>
-  <%=f.password_field :password_confirmation %>
-  <%=f.submit "Sign Up" %>
-<%end%>
+ <%= render 'layouts/errors', :object => User.new %>
+ 
+ <h1>Log In</h1>
+ <%= form_tag log_in_path do %>
+   <%= label_tag :email %>
+   <%= text_field_tag :email %>
+   <%= label_tag :password %>
+   <%= password_field_tag :password %>
+   <%= submit_tag "Log in" %>
+ <% end %>
