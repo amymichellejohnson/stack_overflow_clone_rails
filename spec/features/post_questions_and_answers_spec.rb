@@ -9,6 +9,14 @@ describe "the post questions process" do
     expect(page).to have_content "successfully"
     expect(page).to have_content "How to Be a Dog?"
   end
+  it "returns an error if no question is added" do
+    visit questions_path
+    click_on 'Ask a Question'
+    click_on 'Create Question'
+    expect(page).to have_content "errors"
+  end
+
+
 end
 
 describe "the post answer process" do
@@ -20,4 +28,6 @@ describe "the post answer process" do
     click_on 'Create Answer'
     expect(page).to have_content "successfully"
   end
+
+
 end

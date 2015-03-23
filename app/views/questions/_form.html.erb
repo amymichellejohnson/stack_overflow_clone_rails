@@ -1,3 +1,5 @@
+<%= render 'layouts/errors', :object => @question %>
+
 <%= form_for @question do |f| %>
   <%= f.label :body, "Question" %>
   <%= f.text_field :body %>
