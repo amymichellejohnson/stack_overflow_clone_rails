@@ -16,8 +16,6 @@ describe "the post questions process" do
     click_on 'Create Question'
     expect(page).to have_content "errors"
   end
-
-
 end
 
 describe "the post answer process" do
@@ -31,5 +29,10 @@ describe "the post answer process" do
     expect(page).to have_content "Scratch, sniff and sleep"
   end
 
-
+  it "returns an error if no answer is added" do
+    question = FactoryGirl.create(:question)
+    visit new_question_answer_path(question)
+    click_on 'Create Answer'
+    expect(page).to have_content "errors"
+  end
 end

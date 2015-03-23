@@ -14,7 +14,6 @@ class QuestionsController < ApplicationController
       flash[:notice] = "Your question has successfully been submitted."
       redirect_to questions_path
     else
-      flash[:alert] = "Your question failed to submit."
       render :new
     end
   end
