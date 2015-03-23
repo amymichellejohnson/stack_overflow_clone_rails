@@ -15,8 +15,8 @@ describe "the registration process" do
     user = FactoryGirl.create(:user)
     visit questions_path
     click_on 'Log in'
-    fill_in 'Email', :with => 'dogdog@dog.dog'
-    fill_in 'Password', :with => 'dog'
+    fill_in 'Email', :with => user.email
+    fill_in 'Password', :with => user.password
     click_on 'Log in'
     expect(page).to have_content "Successfully"
   end
