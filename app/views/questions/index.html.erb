@@ -3,7 +3,14 @@
 <ul>
   <% @questions.each do |question| %>
     <li>
-    <%= question.body %><%= link_to "Answer", new_question_answer_path(question) %>
+      <%= question.body %><%= link_to "Answer", new_question_answer_path(question) %>
+      <% if question.answers.any? %>
+        <ul>
+          <% question.answers.each do |answer| %>
+            <li><%= answer.body %></li>
+          <% end %>
+        </ul>
+      <% end %>
     </li>
   <% end %>
 </ul>

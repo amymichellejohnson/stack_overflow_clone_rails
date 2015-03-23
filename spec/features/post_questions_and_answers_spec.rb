@@ -9,6 +9,7 @@ describe "the post questions process" do
     expect(page).to have_content "successfully"
     expect(page).to have_content "How to Be a Dog?"
   end
+
   it "returns an error if no question is added" do
     visit questions_path
     click_on 'Ask a Question'
@@ -27,6 +28,7 @@ describe "the post answer process" do
     fill_in 'Answer', :with => "Scratch, sniff and sleep"
     click_on 'Create Answer'
     expect(page).to have_content "successfully"
+    expect(page).to have_content "Scratch, sniff and sleep"
   end
 
 
