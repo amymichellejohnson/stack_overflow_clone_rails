@@ -20,5 +20,16 @@ describe "the vote for the question owners favorite answer process" do
     expect(page).to have_content "successfully"
   end
 
+  it 'creates a vote for an answer' do
+    answer = FactoryGirl.create(:answer)
+    visit questions_path
+    click_on 'Log in'
+    fill_in 'Email', :with => "dogdog@dog.dog"
+    fill_in 'Password', :with => "dog"
+    click_on 'Log in'
+    click_on 'Vote'
+    expect(page).to have_content "successfully"
+  end
+
 
 end
