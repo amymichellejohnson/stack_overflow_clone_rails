@@ -10,9 +10,9 @@
       <%= question.body %><% if current_user %><%= link_to "Answer", new_question_answer_path(question) %><% end %>
       <% if question.answers.any? %>
         <ul>
-          <% question.answers.order(is_first: :desc).each do |answer| %>
+          <% question.answers.order(is_first: :desc, count: :desc).each do |answer| %>
             <li>
-              <%= answer.votes.length %>
+              <%= answer.count %>
               <%= answer.body %>
 
               <% if current_user && answer.is_first == false && current_user.id == question.user_id %>
@@ -20,7 +20,7 @@
               <% end %>
 
               <% if current_user && !current_user.voted?(answer) %>
-                <%= link_to "Vote", answer_votes_path(answer), :method =>"Post" %>
+                <%= link_to "Vote", answer_votes_path(answer), :method => "Post" %>
               <% end %>
 
             </li>
