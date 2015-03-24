@@ -6,6 +6,7 @@ FactoryGirl.define do
   factory(:user) do
     email("dogdog@dog.dog")
     password("dog")
+    id(10)
   end
 
 end

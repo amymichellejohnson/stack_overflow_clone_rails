@@ -20,4 +20,16 @@ describe "the registration process" do
     click_on 'Log in'
     expect(page).to have_content "Successfully"
   end
+
+  # it 'hides the New User and Log in options when logged in' do
+  #   user = FactoryGirl.create(:user)
+  #   visit questions_path
+  #   click_on 'Log in'
+  #   fill_in 'Email', :with => user.email
+  #   fill_in 'Password', :with => user.password
+  #   click_on 'Log in'
+  #   visit questions_path
+  #   click_on 'Log in'
+  #   expect(page).to have_content "Successfully"
+  # end
 end
