@@ -9,4 +9,8 @@ FactoryGirl.define do
     id(10)
   end
 
+  factory(:answer) do
+    body('Scratch, Sniff and Sleep')
+  end
+
 end
