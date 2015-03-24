@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   validates :email, :presence => true
   has_many :questions
   has_many :answers
+  has_many :votes
   attr_accessor :password
   validates_confirmation_of :password
   before_save :encrypt_password
