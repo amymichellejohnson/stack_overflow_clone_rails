@@ -22,4 +22,15 @@ describe User do
       expect(User.authenticate("dogdog@dog.dog", "cat")).to eq(nil)
     end
   end
+
+  describe '#voted?' do
+    it 'returns true when user has voted for a particular answer' do
+      answer = FactoryGirl.create(:answer)
+      test_user1 = User.create(:email => "catburgler@cat.cat", :password => "goodfood")
+      test_user2 = User.create(:email => "amy@amy.com", :password => "amy")
+      Vote.create(:answer_id => answer.id, :user_id => test_user1.id)
+      expect(test_user1.voted?(answer)).to eq(true)
+      expect(test_user2.voted?(answer)).to eq(false)
+    end
+  end
 end

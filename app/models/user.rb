@@ -22,6 +22,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  def voted?(answer)
+    answer.votes.each do |vote|
+      if vote.user_id == self.id
+        return true
+      end
+    end
+    return false
+  end
+
 
 
 end
