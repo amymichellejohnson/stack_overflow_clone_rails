@@ -7,7 +7,7 @@
 <ul>
   <% @questions.each do |question| %>
     <li>
-      <%= question.body %><%= link_to "Answer", new_question_answer_path(question) %>
+      <%= question.body %><% if current_user %><%= link_to "Answer", new_question_answer_path(question) %><% end %>
       <% if question.answers.any? %>
         <ul>
           <% question.answers.each do |answer| %>
@@ -18,9 +18,10 @@
     </li>
   <% end %>
 </ul>
-<p><%= link_to "Ask a Question", new_question_path %></p>
-<% if !current_user %>
+<% if current_user %>
+  <p><%= link_to "Ask a Question", new_question_path %></p>
+  <p><%= link_to "Log Out", log_out_path %></p>
+<% else %>
   <p><%= link_to "New User", new_user_path %></p>
   <p><%= link_to "Log in", log_in_path %></p>
 <% end %>
-<p><%= link_to "Log Out", log_out_path %></p>
