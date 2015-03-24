@@ -1,16 +1,24 @@
 require "rails_helper"
 describe "the vote for the question owners favorite answer process" do
-  it 'sets answer as first' do
-    user = FactoryGirl.create(:user)
-    question = FactoryGirl.create(:question)
+  it 'displays a star next to answers that belong to a users question' do
     answer = FactoryGirl.create(:answer)
-    answer.question_id = question.id
-    question.user_id = user.id
     visit questions_path
     click_on 'Log in'
-    fill_in 'Email', :with => user.email
-    fill_in 'Password', :with => user.password
+    fill_in 'Email', :with => "dogdog@dog.dog"
+    fill_in 'Password', :with => "dog"
     click_on 'Log in'
     expect(page).to have_content "Star"
   end
+  it 'lets an owner choose their favorite question by clicking it' do
+    answer = FactoryGirl.create(:answer)
+    visit questions_path
+    click_on 'Log in'
+    fill_in 'Email', :with => "dogdog@dog.dog"
+    fill_in 'Password', :with => "dog"
+    click_on 'Log in'
+    click_on 'Star'
+    expect(page).to have_content "successfully"
+  end
+
+
 end
