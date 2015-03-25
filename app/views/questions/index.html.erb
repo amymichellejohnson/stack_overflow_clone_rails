@@ -1,35 +1,47 @@
-<h1> Sassy! </h1>
+<% content_for(:navbar) do %>
+  <li><a href="/">Home</a></li>
+  <li><a href="something/else">Something else</a></li>
+  <li><a href="etc">Etc.</a></li>
+<% end %>
+
+<h1> Stack Overflow </h1>
 
 <% if current_user %>
   <p> You are logged in as <%= current_user.email %> </p>
 <% end %>
 
-<ul>
-  <% @questions.each do |question| %>
-    <li>
-      <%= question.body %><% if current_user %><%= link_to "Answer", new_question_answer_path(question) %><% end %>
-      <% if question.answers.any? %>
-        <ul>
-          <% question.answers.order(is_first: :desc, count: :desc).each do |answer| %>
-            <li>
-              <%= answer.count %>
-              <%= answer.body %>
+<% @questions.each do |question| %>
+  <% if question.answers.any? %>
+      <h5><%= question.user.email %> asks... </h5>
+    <h3>Q: <%= question.body %></h3>
+      <% question.answers.order(is_first: :desc, count: :desc).each do |answer| %>
 
-              <% if current_user && answer.is_first == false && current_user.id == question.user_id %>
-                <%= link_to "Star", question_answer_path(question, answer), :method =>"Patch" %>
-              <% end %>
-
+      <div class="panel panel-info">
+        <table>
+          <tr>
+            <div class="panel-heading">
               <% if current_user && !current_user.voted?(answer) %>
-                <%= link_to "Vote", answer_votes_path(answer), :method => "Post" %>
+                <%= link_to "△", answer_votes_path(answer), :method => "Post", :class => "btn btn-xs btn-primary" %>
               <% end %>
+              <span class="badge" style="position: relative">
+                <%= answer.count %>
+              </span>
+              <%= answer.user.email %> says:
+            </div>
 
-            </li>
-          <% end %>
-        </ul>
+            <% if answer.is_first %>☆<% end %>
+            <%= answer.body %>
+            <% if current_user && answer.is_first == false && current_user.id == question.user_id %>
+              <%= link_to "☆", question_answer_path(question, answer), :method =>"Patch" %>
+            <% end %>
+            </tr>
+          </table>
+        </div>
       <% end %>
-    </li>
   <% end %>
-</ul>
+  <% if current_user %><%= link_to "Answer", new_question_answer_path(question) %><% end %>
+<% end %>
+
 <% if current_user %>
   <p><%= link_to "Ask a Question", new_question_path %></p>
   <p><%= link_to "Log Out", log_out_path %></p>
